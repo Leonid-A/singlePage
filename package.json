@@ -1,0 +1,26 @@
+{
+  "name": "singlepage",
+  "version": "1.0.0",
+  "description": "single page js application",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^4.14.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.43.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "Leonid Arzumanyan",
+  "license": "ISC"
+}
