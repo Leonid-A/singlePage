@@ -1,31 +1,21 @@
-$bgcolor: lightblue;
-$textcolor: darkblue;
-$fontsize: 18px;
+@import "~materialize-css/sass/materialize.scss";
+// body {
+//   display: flex;
+//   min-height: 100vh;
+//   flex-direction: column;
+// }
 
-/* Use the variables */
-body {
-  background-color: $bgcolor;
-  color: $textcolor;
-  font-size: $fontsize;
+// main {
+//   flex: 1 0 auto;
+// }
+    
+#app {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.accordion {
-  max-width: 600px;
-  margin: 4rem auto;
-  width: 90%;
-  font-family: "Raleway", sans-serif;
-  background: #f4f4f4;
-
-  &__copy {
-    display: none;
-    padding: 1rem 1.5rem 2rem 1.5rem;
-    color: gray;
-    line-height: 1.6;
-    font-size: 14px;
-    font-weight: 500;
-
-    &--open {
-      display: block;
-    }
-  }
+.user-item{
+  width:20%;
 }
+

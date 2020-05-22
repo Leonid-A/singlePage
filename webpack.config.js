@@ -1,25 +1,30 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: "none",
   entry: './src/scripts/app.js',
+  plugins: [
+    new CopyPlugin([
+        { from: './src/views', to: './views' }
+      ],
+    ),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      // minify: true
+    })
+  ],
+        
+
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'app.bundle.js',
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      },
-
       {
         test: /\.s[ac]ss$/i,
         use: [
@@ -28,17 +33,7 @@ module.exports = {
           // Translates CSS into CommonJS
           'css-loader',
           // Compiles Sass to CSS
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                indentWidth: 4,
-                outputStyle: 'compressed',
-                includePaths: [path.resolve(__dirname, 'src/styles')],
-                output: path.resolve(__dirname, 'public')
-              },
-            },
-          },
+          'sass-loader',
         ],
       },
     ],
