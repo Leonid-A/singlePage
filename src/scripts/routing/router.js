@@ -1,12 +1,13 @@
-import {Request} from "../request/request.js";
+import {Request} from "../RequestAPI/RequestAPI.js";
 import { Helper } from "../helper/helper.js";
 import { UI } from "../ui/ui.js";
+import {UsersController} from "../pages/UsersController.js";
+
 
 class Router{
     constructor(routes= Helper.isRequired("routes")) {
 
         if (!!Router.instance) {
-            console.log('already exists', Router.instance);
             return Router.instance;
         }
 
@@ -17,7 +18,6 @@ class Router{
         this.defaultRoute = this.routes.find(item => item.type ==="default")
         this.notFoundRoute = this.routes.find(item => item.type === '404')
         this.init();
-        console.log('creating new one', Router.instance)
 
     }
 
@@ -26,53 +26,45 @@ class Router{
         this.hashchanged();
     }
 
-    goToRoute(currentRoute){
+    goToRoute(currentRoute, getParams){
+        //call controller
+        switch(currentRoute.name){
 
-        const request = new Request();
-        const perPage = 100;
-        const pages  = 4;
-        const since = pages * perPage;
-
-        let page = request.get("https://api.github.com/users?since=0&per_page=30")
-        .then((page) =>  {
-            // page
-
-            let output = page.reduce((str, item) => {
-                console.log(str)
-                return str += `<div onclick = "getUser('${item.login}', false)" data-user="${item.login}" class="user-item row">
-                                    <div class="col s12 m7">
-                                        <div class="card">
-                                            <div class="card-image">
-                                                <img src ="${item.avatar_url}">
-                                            </div>
-                                            <div class="card-action">
-                                                <a href="#" class="center-align">${item.login}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>`;
-                }, '');
+        case "users":
+           new UsersController(this.rootElement, getParams);
         
-        
-            this.rootElement.innerHTML = output;
-        
-        
-        });
-
-
-       
-                
+        }
 
     }
 
     hashchanged(){
-        let {hash: currentHash} = window.location;
-        currentHash = currentHash.substring(1);
+        const {currentHash, getParams} = this.setGetParams();
+        console.log(currentHash, getParams)
         const currentRoute = currentHash === "" ?  this.defaultRoute
          : this.routes.find(item => item.name === currentHash) || this.notFoundRoute;
 
-        this.goToRoute(currentRoute);
+         this.goToRoute(currentRoute, getParams);
 
+    }
+
+    setGetParams(getParamsString){
+        let {hash: currentHash} = window.location;
+        let paramsString;
+        
+        currentHash = currentHash.substring(1);
+        [currentHash, paramsString] = currentHash.split("?");
+        const getParams = paramsString ? paramsString.split("&").reduce((obj,item)=>{
+            let key,value;
+            [key,value] = item.split("=");
+            obj[key] = value;
+
+            return obj;
+        },{}): null;
+
+        return {
+            currentHash,
+            getParams
+        }
     }
 }
 

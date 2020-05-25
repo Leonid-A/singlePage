@@ -1,23 +1,7 @@
-// todo - make request -api
-
-// post request
-
-// get request
-
-// put request
-
-// delete request
-
-// ....
-
-// responsetype--->
-
-
-class Request{
+class RequestAPI{
     get(url){
        return (fetch(url)
         .then((response) =>{
-            console.log(response)
            return response.json();
         }))
     }
@@ -35,4 +19,4 @@ class Request{
     }
 }
 
-export {Request};
+export {RequestAPI};
