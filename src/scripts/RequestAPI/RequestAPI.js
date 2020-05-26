@@ -1,12 +1,9 @@
 class RequestAPI{
     get(url){
-       return (fetch(url)
-        .then((response) =>{
-           return response.json();
-        }))
+       return fetch(url).then((response) => response.json())
     }
 
-    post(url){
+    post(){
 
     }
 
@@ -17,6 +14,7 @@ class RequestAPI{
     delete(){
         
     }
+
 }
 
 export {RequestAPI};

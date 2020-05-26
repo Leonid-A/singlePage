@@ -11,6 +11,5 @@ const repos = new Route("repos","repos");
 const about = new Route("about", "about");
 const contacts = new Route("contacts","contacts");
 const notFound = new Route ("404","404", '404');
-
-new Router([home, users, repos, about, contacts, notFound]);
 const ui = new UI([home.name, users.name, repos.name, about.name, contacts.name]);
+new Router([home, users, repos, about, contacts, notFound]);

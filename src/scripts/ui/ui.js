@@ -1,36 +1,25 @@
 class UI {
-    constructor(){
+    constructor(navParams){
         this.pageBody = document.getElementById("pageBody");
         this.rootElement = document.getElementById("app");
+        this.navMenuParams = navParams;
         this.header();
         this.footer();
+
     }
 
     header(){
-      const nav =document.createElement("nav");
-      nav.classList="deep-purple lighten-2"
-      //create from router object
-      nav.innerHTML = `
-        <div class="nav-wrapper">
-            <ul class="left hide-on-med-and-down">
-                <li id = "#home" class="active"><a href="#home" >Home</a></li>
-                <li id = "#users"><a href="#users">Users</a></li>
-                <li id = "#repos"><a href="#repos">Repos</a></li>
-                <li id = "#about"><a href="#about">About</a></li>
-                <li id = "#contacts"><a href="#contacts">Contacts</a></li>
-            </ul>
-        </div>`
-           // <div class="nav-wrapper">
-        //     <form>
-        //         <div class="input-field">
-        //             <input id="search" type="search" required>
-        //             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-        //             <i class="material-icons">close</i>
-        //         </div>
-        //     </form>
-        // </div>`
-      
-        this.pageBody.insertBefore(nav, this.rootElement)
+        const nav =document.createElement("nav");
+        nav.classList="deep-purple lighten-2";
+        let output = `<div class="nav-wrapper">
+                      <ul class="left hide-on-med-and-down">`
+        let navMenu = this.navMenuParams.reduce((str,item) => {
+            return str+= `<li id = "#${item}" class = "menuItem"><a href="#${item}" >${item[0].toUpperCase() + item.substr(1)}</a></li>`
+        }, output)
+        navMenu += `</ul> </div>`
+        nav.innerHTML = navMenu;
+        this.pageBody.prepend(nav);
+
     }
 
     footer(){
@@ -43,10 +32,18 @@ class UI {
                 </div>
              </div>`
         
-    this.pageBody.appendChild(footer);
+    this.pageBody.append(footer);
+    }
+
+    static changeMenuActiveItem(activePageName){
+       let arr = document.getElementsByClassName("menuItem")
+
+       for (let i = 0; i < arr.length; i++){
+        arr[i].classList = "menuItem";
+      }
+
+        document.getElementById(`#${activePageName}`).classList = "menuItem active";
     }
 }
-
-
 
 export { UI };

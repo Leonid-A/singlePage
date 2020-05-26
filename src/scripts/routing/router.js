@@ -32,25 +32,27 @@ class Router{
 
         case "users":
            new UsersController(this.rootElement, getParams);
+    }
         
-        }
-
     }
 
     hashchanged(){
         const {currentHash, getParams} = this.setGetParams();
-        console.log(currentHash, getParams)
         const currentRoute = currentHash === "" ?  this.defaultRoute
          : this.routes.find(item => item.name === currentHash) || this.notFoundRoute;
 
-         this.goToRoute(currentRoute, getParams);
+        this.rootElement.innerHTML = ''; 
+        this.goToRoute(currentRoute, getParams);
+        UI.changeMenuActiveItem(currentRoute.name)
+    }
 
+    static changeHash(url) {
+        window.location.hash = url;
     }
 
     setGetParams(getParamsString){
         let {hash: currentHash} = window.location;
         let paramsString;
-        
         currentHash = currentHash.substring(1);
         [currentHash, paramsString] = currentHash.split("?");
         const getParams = paramsString ? paramsString.split("&").reduce((obj,item)=>{
@@ -65,6 +67,17 @@ class Router{
             currentHash,
             getParams
         }
+    }
+
+    static stringifyGetParams(params){
+        let str="?";
+        for (let i in params){
+            if (params.hasOwnProperty(i)) {
+                str += i + "=" + params[i] + "&";
+              }
+        }
+        return str = str.substring(0, str.length - 1);
+        
     }
 }
 
