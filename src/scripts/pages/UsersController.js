@@ -5,7 +5,6 @@ import { Router } from "../routing/router.js"
 class UsersController{
     constructor(rootElement,getParams){
         this.pageLastUserId = 0;
-        //todo-make more proper checks for pageNumbers
         this.pageNumber= Number(getParams && getParams.page ? getParams.page : 1);
         this.search= getParams && getParams.search ? getParams.search : '';
         this.rootElement=rootElement;
@@ -20,7 +19,6 @@ class UsersController{
         usersCont.id = "users-cont";
         this.rootElement.appendChild(usersCont);
         this.getUsers(this.pageNumber);
-        // this.drawPagination();
         this.drawSearch();
     }
 
@@ -68,7 +66,6 @@ class UsersController{
                                         </div>
                                     </div>
                                 </div>`;
-
             }, "");
             this.usersCont.innerHTML = usersView;
         }
@@ -97,7 +94,6 @@ class UsersController{
             <li class="waves-effect"><a href="#users?page=${currentPage+2}${searchURL}">${currentPage+2}</a></li>
             <li class="waves-effect"><a title = "+5 pages" href="#users?page=${currentPage+5}${searchURL}"><i class="material-icons">chevron_right</i></a></li>
             <li class="waves-effect"><a title = "+10 pages" href="#users?page=${currentPage+10}${searchURL}"><i class="material-icons">last_page</i></a></li>`
-        
         this.rootElement.appendChild(pagin);
 
     }

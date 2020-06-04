@@ -2,6 +2,7 @@ import {Request} from "../RequestAPI/RequestAPI.js";
 import { Helper } from "../helper/helper.js";
 import { UI } from "../ui/ui.js";
 import {UsersController} from "../pages/UsersController.js";
+import {ReposController} from "../pages/ReposController.js";
 
 
 class Router{
@@ -27,19 +28,22 @@ class Router{
     }
 
     goToRoute(currentRoute, getParams){
-        //call controller
+        //call controller 
         switch(currentRoute.name){
 
         case "users":
            new UsersController(this.rootElement, getParams);
-    }
-        
+            break;
+        case "repos":
+           new ReposController(this.rootElement, getParams);
+            break;
+        }
     }
 
     hashchanged(){
         const {currentHash, getParams} = this.setGetParams();
         const currentRoute = currentHash === "" ?  this.defaultRoute
-         : this.routes.find(item => item.name === currentHash) || this.notFoundRoute;
+        : this.routes.find(item => item.name === currentHash) || this.notFoundRoute;
 
         this.rootElement.innerHTML = ''; 
         this.goToRoute(currentRoute, getParams);

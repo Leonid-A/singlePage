@@ -1,12 +1,12 @@
 @import "~materialize-css/sass/materialize.scss";
 
-#users-cont {
+#users-cont, #repos-cont {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
-.user-item{
+.user-item, .repo-item{
   width:20%;
 }
 
@@ -16,3 +16,8 @@
   margin-right: auto;
 }
 
+.repos-url{
+  display:inline-block;
+  margin-top: 10px;
+  padding-left:24px;
+}
