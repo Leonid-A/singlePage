@@ -1,5 +1,6 @@
 import { RequestAPI } from "../RequestAPI/RequestAPI.js";
-import { Router } from "../routing/router.js"
+import { Router } from "../routing/router.js";
+import {RepoController} from "./RepoController.js"
 
 class ReposController{
     constructor(rootElement,getParams){
@@ -21,8 +22,6 @@ class ReposController{
         this.getRepos();
         this.drawSearch();
         window.onscroll = (ev) => {
-            console.log(this.canGetRepos, ev.isTrusted,  document.body.clientHeight , document.documentElement.scrollTop , window.innerHeight,  document.body.clientHeight - document.documentElement.scrollTop - window.innerHeight);
-
             if(this.canGetRepos && document.body.clientHeight - document.documentElement.scrollTop - window.innerHeight < 50){
                 this.canGetRepos = false;
                 this.pageNumber++;
@@ -53,7 +52,7 @@ class ReposController{
                 this.pageLastRepoId = item.id;
                 return str+= `<div data-user="${item.full_name}" class="repo-item row">
                 <div class="col s12 m7">
-                    <div class="card">
+                    <div class="card card-item">
                         <div class="card-image">
                             <img src ="${item.owner.avatar_url}">
                         </div>
@@ -67,10 +66,22 @@ class ReposController{
             },"")
             
             this.reposCont.insertAdjacentHTML( 'beforeend', reposView )
-            
             this.canGetRepos = true;
+            this.addRepoListener();
+
         }
     }
+
+    addRepoListener(){
+        const repoItems = document.getElementsByClassName("repo-item");
+ 
+        for (let i=0; i< repoItems.length; i++){
+            repoItems[i].addEventListener("click", () => {
+                const itemName = repoItems[i].getAttribute("data-user");
+                this.canGetRepos = false;
+                new RepoController(itemName)},false);
+        }
+     }
 
     drawSearch(){
         const searchDiv = document.createElement("nav");

@@ -1,5 +1,6 @@
 import { RequestAPI } from "../RequestAPI/RequestAPI.js";
-import { Router } from "../routing/router.js"
+import { Router } from "../routing/router.js";
+import {UserController} from "./UserController.js";
 
 
 class UsersController{
@@ -54,9 +55,9 @@ class UsersController{
         } else {
             const usersView = users.reduce((str, item) => {
                 this.pageLastUserId = item.id;
-                return str += `<div onclick = "getUser('${item.login}', false)" data-user="${item.login}" class="user-item row">
+                return str += `<div data-user="${item.login}" class="user-item row">
                                     <div class="col s12 m7">
-                                        <div class="card">
+                                        <div class="card card-item">
                                             <div class="card-image">
                                                 <img src ="${item.avatar_url}">
                                             </div>
@@ -68,11 +69,25 @@ class UsersController{
                                 </div>`;
             }, "");
             this.usersCont.innerHTML = usersView;
+
+            this.addUserListener()
         }
     }
 
+    addUserListener(){
+       const userItems = document.getElementsByClassName("user-item");
+       for (let i=0; i< userItems.length; i++){
+           userItems[i].addEventListener("click", () => {
+            const itemName = userItems[i].getAttribute("data-user");
+            const pagin = document.getElementById("pagin");
+            if(pagin){
+                pagin.parentNode.removeChild(pagin);
+            }
+            new UserController(itemName)},false);
+       }
+    }
+
     drawPagination(totalCount){
-        //todo - disable and hide cases
         const { search } = this;
         let searchURL = "";
         if (search) {
@@ -84,6 +99,7 @@ class UsersController{
         currentPage = currentPage === 1 ? currentPage + 2 : (currentPage === 2 ? currentPage + 1: currentPage)
         const pagin = document.createElement("ul");
         pagin.classList = "pagination center-align";
+        pagin.id = "pagin";
         pagin.innerHTML = ` 
             <li class="waves-effect ${breakpoint < 11 ? 'disabled' : ''}"><a title = "-10 pages" href="#users?page=${currentPage-10}${searchURL}"><i class="material-icons">first_page</i></a></li> 
             <li class="waves-effect ${breakpoint < 6 ? 'disabled' : ''}"><a title = "-5 pages" href="#users?page=${currentPage-5}${searchURL}"><i class="material-icons">chevron_left</i></a></li>
@@ -95,7 +111,6 @@ class UsersController{
             <li class="waves-effect"><a title = "+5 pages" href="#users?page=${currentPage+5}${searchURL}"><i class="material-icons">chevron_right</i></a></li>
             <li class="waves-effect"><a title = "+10 pages" href="#users?page=${currentPage+10}${searchURL}"><i class="material-icons">last_page</i></a></li>`
         this.rootElement.appendChild(pagin);
-
     }
 
     drawSearch(){
@@ -110,9 +125,7 @@ class UsersController{
             </div>`      
         
         this.rootElement.prepend(searchDiv);
-
         const usersSearchInput = document.getElementById("search");
-
         usersSearchInput.addEventListener("keypress", (event) => {
             if(event.key === "Enter"){
                 this.getParams.search = usersSearchInput.value;
@@ -122,7 +135,6 @@ class UsersController{
             }
         })
     }
-
 }
 
 export {UsersController}
