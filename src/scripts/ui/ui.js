@@ -41,8 +41,13 @@ class UI {
        for (let i = 0; i < arr.length; i++){
         arr[i].classList = "menuItem";
       }
+      const activeItem = document.getElementById(`#${activePageName}`)
 
-        document.getElementById(`#${activePageName}`).classList = "menuItem active";
+      if(activeItem){
+        activeItem.classList.add("active");
+
+      }
+
     }
 }
 

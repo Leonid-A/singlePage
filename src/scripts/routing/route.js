@@ -6,9 +6,6 @@ class Route{
         this.htmlName = htmlName;
         this.type = type;
     }
-    isActive(){
-        //todo check active
-    }
 }
 
 export default Route;

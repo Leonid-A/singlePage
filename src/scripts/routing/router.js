@@ -1,8 +1,13 @@
-import {Request} from "../RequestAPI/RequestAPI.js";
 import { Helper } from "../helper/helper.js";
 import { UI } from "../ui/ui.js";
 import {UsersController} from "../pages/UsersController.js";
 import {ReposController} from "../pages/ReposController.js";
+import {RepoController} from "../pages/RepoController.js";
+import {UserController} from "../pages/UserController.js";
+import HomeController from "../pages/HomeController.js";
+import {NotFoundController} from "../pages/NotFoundController.js";
+import {AboutController} from "../pages/AboutController.js";
+import {ContactsController} from "../pages/ContactsController.js";
 
 
 class Router{
@@ -28,16 +33,37 @@ class Router{
     }
 
     goToRoute(currentRoute, getParams){
-        //call controller 
-        switch(currentRoute.name){
-
-        case "users":
-           new UsersController(this.rootElement, getParams);
-            break;
-        case "repos":
-           new ReposController(this.rootElement, getParams);
-            break;
-        }
+        console.log(currentRoute && currentRoute.name);
+        // try {
+            switch(currentRoute && currentRoute.name){
+                case "users":
+                    new UsersController(this.rootElement, getParams);
+                    break;
+                case "user":
+                    new UserController(this.rootElement, getParams);
+                    break;
+                case "repos":
+                    new ReposController(this.rootElement, getParams);
+                    break;
+                case "repo":
+                    new RepoController(this.rootElement, getParams);
+                    break;
+                case "home":
+                    new HomeController(this.rootElement);
+                    break;
+                case "about":
+                    new AboutController(this.rootElement);
+                    break;
+                case "contacts":
+                    new ContactsController(this.rootElement);
+                    break;    
+                default:
+                    new NotFoundController(this.rootElement)
+            }
+        // } 
+        // catch (error) {
+        //     new NotFoundController(this.rootElement)
+        // }
     }
 
     hashchanged(){
@@ -47,7 +73,7 @@ class Router{
 
         this.rootElement.innerHTML = ''; 
         this.goToRoute(currentRoute, getParams);
-        UI.changeMenuActiveItem(currentRoute.name)
+        UI.changeMenuActiveItem(currentRoute && currentRoute.name)
     }
 
     static changeHash(url) {

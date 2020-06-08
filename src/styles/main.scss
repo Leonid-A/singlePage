@@ -26,6 +26,12 @@
   cursor: pointer;
 }
 
-#item-img, #curent-user{
-  width: 50%;
+// #item-img, #curent-user{
+//   width: 50%;
+// }
+
+.item-descr{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

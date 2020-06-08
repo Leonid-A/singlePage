@@ -77,9 +77,10 @@ class ReposController{
  
         for (let i=0; i< repoItems.length; i++){
             repoItems[i].addEventListener("click", () => {
-                const itemName = repoItems[i].getAttribute("data-user");
-                this.canGetRepos = false;
-                new RepoController(itemName)},false);
+                this.getParams.repo = repoItems[i].getAttribute("data-user");
+                const getParamsString = Router.stringifyGetParams(this.getParams);
+                Router.changeHash(`#repo${getParamsString}`);
+            },false);
         }
      }
 

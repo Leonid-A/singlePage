@@ -78,12 +78,10 @@ class UsersController{
        const userItems = document.getElementsByClassName("user-item");
        for (let i=0; i< userItems.length; i++){
            userItems[i].addEventListener("click", () => {
-            const itemName = userItems[i].getAttribute("data-user");
-            const pagin = document.getElementById("pagin");
-            if(pagin){
-                pagin.parentNode.removeChild(pagin);
-            }
-            new UserController(itemName)},false);
+            this.getParams.user = userItems[i].getAttribute("data-user");
+            const getParamsString = Router.stringifyGetParams(this.getParams);
+            Router.changeHash(`#user${getParamsString}`);
+            },false);
        }
     }
 
@@ -99,7 +97,6 @@ class UsersController{
         currentPage = currentPage === 1 ? currentPage + 2 : (currentPage === 2 ? currentPage + 1: currentPage)
         const pagin = document.createElement("ul");
         pagin.classList = "pagination center-align";
-        pagin.id = "pagin";
         pagin.innerHTML = ` 
             <li class="waves-effect ${breakpoint < 11 ? 'disabled' : ''}"><a title = "-10 pages" href="#users?page=${currentPage-10}${searchURL}"><i class="material-icons">first_page</i></a></li> 
             <li class="waves-effect ${breakpoint < 6 ? 'disabled' : ''}"><a title = "-5 pages" href="#users?page=${currentPage-5}${searchURL}"><i class="material-icons">chevron_left</i></a></li>
