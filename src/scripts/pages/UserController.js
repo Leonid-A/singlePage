@@ -18,7 +18,7 @@ class UserController{
     }
 
     drawUser(result){
-        const output =` <div class="col s12 m7">
+        const output =` <div class="col s12">
                             <div class="card horizontal">
                                 <div class="card-image">
                                     <img src="${result.avatar_url}">

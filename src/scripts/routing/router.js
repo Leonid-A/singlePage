@@ -33,8 +33,6 @@ class Router{
     }
 
     goToRoute(currentRoute, getParams){
-        console.log(currentRoute && currentRoute.name);
-        // try {
             switch(currentRoute && currentRoute.name){
                 case "users":
                     new UsersController(this.rootElement, getParams);
@@ -60,10 +58,6 @@ class Router{
                 default:
                     new NotFoundController(this.rootElement)
             }
-        // } 
-        // catch (error) {
-        //     new NotFoundController(this.rootElement)
-        // }
     }
 
     hashchanged(){

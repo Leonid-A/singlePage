@@ -18,7 +18,7 @@ class RepoController{
     }
 
     drawRepo(result){
-        const output =` <div class="col s12 m7">
+        const output =` <div class="col s12">
                             <div class="card horizontal">
                                 <div class="card-image">
                                     <img src="${result.owner.avatar_url}">

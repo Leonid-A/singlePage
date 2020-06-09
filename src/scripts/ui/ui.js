@@ -10,7 +10,7 @@ class UI {
 
     header(){
         const nav =document.createElement("nav");
-        nav.classList="deep-purple lighten-2";
+        nav.classList="indigo darken-4";
         let output = `<div class="nav-wrapper">
                       <ul class="left hide-on-med-and-down">`
         let navMenu = this.navMenuParams.reduce((str,item) => {
@@ -24,7 +24,7 @@ class UI {
 
     footer(){
         const footer = document.createElement("footer");
-        footer.classList = "page-footer deep-purple lighten-2";
+        footer.classList = "page-footer indigo darken-4";
         footer.id= "footer";
         footer.innerHTML = `
             <div class="footer-copyright">

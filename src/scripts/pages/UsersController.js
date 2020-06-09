@@ -56,7 +56,7 @@ class UsersController{
             const usersView = users.reduce((str, item) => {
                 this.pageLastUserId = item.id;
                 return str += `<div data-user="${item.login}" class="user-item row">
-                                    <div class="col s12 m7">
+                                    <div class="col s12">
                                         <div class="card card-item">
                                             <div class="card-image">
                                                 <img src ="${item.avatar_url}">
@@ -112,7 +112,7 @@ class UsersController{
 
     drawSearch(){
         const searchDiv = document.createElement("nav");
-        searchDiv.classList = "row deep-purple lighten-2";
+        searchDiv.classList = "row indigo darken-3";
         searchDiv.innerHTML = `<div class="nav-wrapper col s3">
                 <div class="input-field">
                     <input id="search" type="search" required value="${this.search}">

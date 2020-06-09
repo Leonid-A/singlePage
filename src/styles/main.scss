@@ -1,4 +1,13 @@
 @import "~materialize-css/sass/materialize.scss";
+body{
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#app{
+  flex: 1;
+}
 
 #users-cont, #repos-cont {
   display: flex;
@@ -25,10 +34,6 @@
 .card-item{
   cursor: pointer;
 }
-
-// #item-img, #curent-user{
-//   width: 50%;
-// }
 
 .item-descr{
   display:flex;

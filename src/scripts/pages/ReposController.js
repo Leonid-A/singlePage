@@ -51,7 +51,7 @@ class ReposController{
             const reposView = repos.reduce((str, item) => {
                 this.pageLastRepoId = item.id;
                 return str+= `<div data-user="${item.full_name}" class="repo-item row">
-                <div class="col s12 m7">
+                <div class="col s12">
                     <div class="card card-item">
                         <div class="card-image">
                             <img src ="${item.owner.avatar_url}">
@@ -86,7 +86,7 @@ class ReposController{
 
     drawSearch(){
         const searchDiv = document.createElement("nav");
-        searchDiv.classList = "row deep-purple lighten-2";
+        searchDiv.classList = "row indigo darken-3";
         searchDiv.innerHTML = `<div class="nav-wrapper col s3">
                 <div class="input-field">
                     <input id="search" type="search" required value="${this.search}">
