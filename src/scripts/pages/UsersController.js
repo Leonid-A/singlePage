@@ -69,7 +69,6 @@ class UsersController{
                                 </div>`;
             }, "");
             this.usersCont.innerHTML = usersView;
-
             this.addUserListener()
         }
     }
@@ -91,7 +90,6 @@ class UsersController{
         if (search) {
             searchURL = `&search=${search}`
         }
-
         let currentPage = this.pageNumber;
         const breakpoint = currentPage;
         currentPage = currentPage === 1 ? currentPage + 2 : (currentPage === 2 ? currentPage + 1: currentPage)

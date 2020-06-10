@@ -2,6 +2,7 @@ import '../styles/main.scss';
 import { UI } from "./ui/ui.js";
 import { Router } from "./routing/router.js";
 import Route from "./routing/route.js";
+import img from '../../image/og-image.png';
 
 
 const home = new Route("home", "home", 'default');

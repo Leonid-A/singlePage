@@ -14,22 +14,17 @@ module.exports = {
         { from: './src/views', to: './views' }
       ],
     ),
-    // new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      // minify: true
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer'
     })
   ],
-        
 
   output: {
     filename: 'main.js',
@@ -45,6 +40,13 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+        },
       },
     ],
   },

@@ -8,22 +8,18 @@ import HomeController from "../pages/HomeController.js";
 import {NotFoundController} from "../pages/NotFoundController.js";
 import {AboutController} from "../pages/AboutController.js";
 
-
 class Router{
     constructor(routes= Helper.isRequired("routes")) {
 
         if (!!Router.instance) {
             return Router.instance;
         }
-
         Router.instance = this;
-
         this.routes = routes;
         this.rootElement = document.getElementById("app");
         this.defaultRoute = this.routes.find(item => item.type ==="default")
         this.notFoundRoute = this.routes.find(item => item.type === '404')
         this.init();
-
     }
 
     init(){
@@ -97,7 +93,6 @@ class Router{
               }
         }
         return str = str.substring(0, str.length - 1);
-        
     }
 }
 

@@ -1,6 +1,5 @@
 import { RequestAPI } from "../RequestAPI/RequestAPI.js";
 
-
 export class AboutController{
     constructor(rootElement){
         this.rootElement = rootElement;

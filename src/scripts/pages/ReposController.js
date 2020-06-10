@@ -69,7 +69,6 @@ class ReposController{
             this.reposCont.insertAdjacentHTML( 'beforeend', reposView )
             this.canGetRepos = true;
             this.addRepoListener();
-
         }
     }
 
@@ -97,9 +96,7 @@ class ReposController{
             </div>`      
         
         this.rootElement.prepend(searchDiv);
-
         const reposSearchInput = document.getElementById("search");
-
         reposSearchInput.addEventListener("keypress", (event) => {
             if(event.key === "Enter"){
                 this.getParams.search = reposSearchInput.value;
@@ -109,7 +106,6 @@ class ReposController{
             }
         })
     }
-
 }
 
 export {ReposController}

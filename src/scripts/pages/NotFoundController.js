@@ -3,6 +3,7 @@ export class NotFoundController{
         this.rootElement = rootElement;
         this.init();
     }
+    
     init(){
         this.rootElement.innerHTML = `<div class="center">
                                        <p> Page Not Found<p>
