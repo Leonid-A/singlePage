@@ -1,6 +1,5 @@
 import { RequestAPI } from "../RequestAPI/RequestAPI.js";
 import { Router } from "../routing/router.js";
-import {RepoController} from "./RepoController.js"
 
 class ReposController{
     constructor(rootElement,getParams){
@@ -17,7 +16,11 @@ class ReposController{
 
     init(){
         const reposCont = document.createElement("div");
-        reposCont.id = "repos-cont";
+        reposCont.className = "container";
+        const row = document.createElement("div");
+        row.className= "row";
+        row.id = "repos-cont";
+        reposCont.appendChild(row);
         this.rootElement.appendChild(reposCont);
         this.getRepos();
         this.drawSearch();
@@ -50,19 +53,17 @@ class ReposController{
         } else {
             const reposView = repos.reduce((str, item) => {
                 this.pageLastRepoId = item.id;
-                return str+= `<div data-user="${item.full_name}" class="repo-item row">
-                <div class="col s12">
-                    <div class="card card-item">
-                        <div class="card-image">
-                            <img src ="${item.owner.avatar_url}">
-                        </div>
-                        <div class="card-action center">
-                            <span>${item.name}</span><br>
-                            <a class="repos-url" href="#${item.url}">URL</a>
-                        </div>
-                    </div>
-                </div>
-            </div>`
+                return str+= `<div data-user="${item.full_name}" class="col s12 m4 xl3 repo-item">
+                                <div class="card card-item hoverable">
+                                    <div class="card-image">
+                                        <img id="image" src ="${item.owner.avatar_url}">
+                                    </div>
+                                    <div class="card-action center">
+                                        <span>${item.name}</span><br>
+                                        <a class="repos-url" href="#${item.url}">URL</a>
+                                    </div>
+                                </div>
+                            </div>`
             },"")
             
             this.reposCont.insertAdjacentHTML( 'beforeend', reposView )
@@ -86,8 +87,8 @@ class ReposController{
 
     drawSearch(){
         const searchDiv = document.createElement("nav");
-        searchDiv.classList = "row indigo darken-3";
-        searchDiv.innerHTML = `<div class="nav-wrapper col s3">
+        searchDiv.classList = "row light-green darken-1";
+        searchDiv.innerHTML = `<div class="nav-wrapper col s12 m6 l4 xl3">
                 <div class="input-field">
                     <input id="search" type="search" required value="${this.search}">
                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>

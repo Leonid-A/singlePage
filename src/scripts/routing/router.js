@@ -7,7 +7,6 @@ import {UserController} from "../pages/UserController.js";
 import HomeController from "../pages/HomeController.js";
 import {NotFoundController} from "../pages/NotFoundController.js";
 import {AboutController} from "../pages/AboutController.js";
-import {ContactsController} from "../pages/ContactsController.js";
 
 
 class Router{
@@ -52,9 +51,6 @@ class Router{
                 case "about":
                     new AboutController(this.rootElement);
                     break;
-                case "contacts":
-                    new ContactsController(this.rootElement);
-                    break;    
                 default:
                     new NotFoundController(this.rootElement)
             }

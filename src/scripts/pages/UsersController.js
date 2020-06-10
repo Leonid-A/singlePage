@@ -1,7 +1,5 @@
 import { RequestAPI } from "../RequestAPI/RequestAPI.js";
 import { Router } from "../routing/router.js";
-import {UserController} from "./UserController.js";
-
 
 class UsersController{
     constructor(rootElement,getParams){
@@ -17,7 +15,11 @@ class UsersController{
 
     init(){
         const usersCont = document.createElement("div");
-        usersCont.id = "users-cont";
+        usersCont.className = "container";
+        const row = document.createElement("div");
+        row.id = "users-cont";
+        row.className = "row";
+        usersCont.appendChild(row);
         this.rootElement.appendChild(usersCont);
         this.getUsers(this.pageNumber);
         this.drawSearch();
@@ -55,15 +57,13 @@ class UsersController{
         } else {
             const usersView = users.reduce((str, item) => {
                 this.pageLastUserId = item.id;
-                return str += `<div data-user="${item.login}" class="user-item row">
-                                    <div class="col s12">
-                                        <div class="card card-item">
-                                            <div class="card-image">
-                                                <img src ="${item.avatar_url}">
-                                            </div>
-                                            <div class="card-action center">
-                                                <span>${item.login}</span>
-                                            </div>
+                return str += `<div data-user="${item.login}" class="col s12 m4 xl2 user-item" >
+                                    <div class="card card-item hoverable">
+                                        <div class="card-image">
+                                            <img id="image" src ="${item.avatar_url}">
+                                        </div>
+                                        <div class="card-action center">
+                                            <span>${item.login}</span>
                                         </div>
                                     </div>
                                 </div>`;
@@ -112,7 +112,7 @@ class UsersController{
 
     drawSearch(){
         const searchDiv = document.createElement("nav");
-        searchDiv.classList = "row indigo darken-3";
+        searchDiv.classList = "row light-green darken-1";
         searchDiv.innerHTML = `<div class="nav-wrapper col s3">
                 <div class="input-field">
                     <input id="search" type="search" required value="${this.search}">

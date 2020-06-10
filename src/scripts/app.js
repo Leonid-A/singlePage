@@ -10,8 +10,7 @@ const user = new Route("user","user");
 const repos = new Route("repos","repos");
 const repo = new Route("repo","repo");
 const about = new Route("about", "about");
-const contacts = new Route("contacts","contacts");
 const notFound = new Route ("notFound","notFound");
 
-new UI([home.name, users.name, repos.name, about.name, contacts.name]);
-new Router([home, users, user, repos, about, contacts, repo, notFound]);
+new UI([home.name, users.name, repos.name, about.name]);
+new Router([home, users, user, repos, about, repo, notFound]);

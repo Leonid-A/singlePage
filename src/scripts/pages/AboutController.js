@@ -18,7 +18,8 @@ export class AboutController{
     }
 
     drawRepos(result){
-        let output=`<div class="col s12">
+        let output=`<div class = "container">
+                    <div class="col s12">
                         <div class="card horizontal">
                             <div class="card-image">
                                 <img src="${result[1].owner.avatar_url}">
@@ -31,7 +32,7 @@ export class AboutController{
         for(let i=0; i<result.length;i++){
             output+= `<p> ${i+1}. <a href="${result[i].html_url}" target="_blank"> ${result[i].name} </a></p>`
         }
-        output+=`</div></div></div></div>`
+        output+=`</div></div></div></div></div>`
         this.rootElement.innerHTML= output;
     }
 }
