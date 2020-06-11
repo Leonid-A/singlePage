@@ -111,7 +111,7 @@ class UsersController{
     drawSearch(){
         const searchDiv = document.createElement("nav");
         searchDiv.classList = "row light-green darken-1";
-        searchDiv.innerHTML = `<div class="nav-wrapper col s3">
+        searchDiv.innerHTML = `<div class="nav-wrapper col s12 m6 l4 xl3">
                 <div class="input-field">
                     <input id="search" type="search" required value="${this.search}">
                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>
